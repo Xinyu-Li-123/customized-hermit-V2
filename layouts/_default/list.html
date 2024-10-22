@@ -3,6 +3,18 @@
 {{ end }}
 
 {{ define "main" }}
+
+	{{ if .Site.Params.bgImg -}}
+	<style>.bg-img {background-image: url('{{.Site.Params.bgImg}}'); opacity: 0.2 !important}</style>
+	{{- else if .Site.Params.images -}}
+		{{- range first 1 .Site.Params.images -}}
+		<style>.bg-img {background-image: url('{{. | absURL}}');}</style>
+		{{- end -}}
+	{{- end -}}
+	{{- if (or .Site.Params.images .Site.Params.bgImg) }}
+	<div class="bg-img"></div>
+	{{- end }}
+
 	<main class="site-main section-inner thin {{- if ne false .Site.Params.usesAnimation }} animated fadeIn faster{{- end -}}">
 		<h1>{{ .Title }}</h1>
 		{{- if .Content }}

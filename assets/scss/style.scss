@@ -17,6 +17,7 @@
 
 ::selection {
   background: $highlight-grey;
+  color: invert($text);
 }
 
 /* Webkit Scrollbar Customize */
