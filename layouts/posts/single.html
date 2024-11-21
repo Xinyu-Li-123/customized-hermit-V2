@@ -49,10 +49,9 @@
 			{{- end }}
 		</article>
 		{{- end -}}
-		{{- if .Params.toc }}
+		{{- if or (.Site.Params.global_toc) (.Params.toc) -}}
 		<aside id="toc">
 			<div class="toc-title">{{- if fileExists "i18n" -}} {{ i18n "tableOfContents" }} {{- else -}} Table of Contents {{- end -}}</div>
-			<!-- {{ .TableOfContents }} -->
 			  {{ partial "toc.html" . }}
 		</aside>
 		{{- end }}
