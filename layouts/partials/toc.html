@@ -1,0 +1,55 @@
+{{ $startLevel := .Site.Params.markup.tableOfContents.startLevel | default 2 }}
+{{ $endLevel := .Site.Params.markup.tableOfContents.endLevel | default 3 }}
+{{ $ordered := .Site.Params.markup.tableOfContents.ordered | default false }}
+
+{{ $headings := .Page.Fragments.Headings }}
+{{ if $headings }}
+  <nav id="TableOfContents">
+    {{ if $ordered }}
+      <ol>
+    {{ else }}
+      <ul>
+    {{ end }}
+    {{ range $headings }}
+      {{ template "toc-branch" dict "Heading" . "CurrentLevel" 1 "StartLevel" $startLevel "EndLevel" $endLevel "Ordered" $ordered }}
+    {{ end }}
+    {{ if $ordered }}
+      </ol>
+    {{ else }}
+      </ul>
+    {{ end }}
+  </nav>
+{{ end }}
+
+{{ define "toc-branch" }}
+  {{ $h := .Heading }}
+  {{ $currentLevel := .CurrentLevel }}
+  {{ $startLevel := .StartLevel }}
+  {{ $endLevel := .EndLevel }}
+  {{ $ordered := .Ordered }}
+
+  {{ if and (ge $currentLevel $startLevel) (le $currentLevel $endLevel) }}
+    <li>
+      <a href="#{{ $h.ID }}">{{ $h.Title | plainify }}</a>
+      {{ if $h.Headings }}
+        {{ if $ordered }}
+          <ol>
+        {{ else }}
+          <ul>
+        {{ end }}
+        {{ range $h.Headings }}
+          {{ template "toc-branch" dict "Heading" . "CurrentLevel" (add $currentLevel 1) "StartLevel" $startLevel "EndLevel" $endLevel "Ordered" $ordered }}
+        {{ end }}
+        {{ if $ordered }}
+          </ol>
+        {{ else }}
+          </ul>
+        {{ end }}
+      {{ end }}
+    </li>
+  {{ else if $h.Headings }}
+    {{ range $h.Headings }}
+      {{ template "toc-branch" dict "Heading" . "CurrentLevel" (add $currentLevel 1) "StartLevel" $startLevel "EndLevel" $endLevel "Ordered" $ordered }}
+    {{ end }}
+  {{ end }}
+{{ end }}

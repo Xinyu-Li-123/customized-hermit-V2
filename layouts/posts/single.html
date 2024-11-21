@@ -52,7 +52,8 @@
 		{{- if .Params.toc }}
 		<aside id="toc">
 			<div class="toc-title">{{- if fileExists "i18n" -}} {{ i18n "tableOfContents" }} {{- else -}} Table of Contents {{- end -}}</div>
-			{{ .TableOfContents }}
+			<!-- {{ .TableOfContents }} -->
+			  {{ partial "toc.html" . }}
 		</aside>
 		{{- end }}
 		<div class="post-nav thin">
