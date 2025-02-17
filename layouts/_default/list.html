@@ -40,7 +40,7 @@
 		
         {{- if .Site.Params.displayRecent -}}
 		{{- $recentCount := .Params.recentPostsCount | default .Site.Params.recentCount }}
-        {{- if not .Site.Params.disableRecent -}}
+        {{- if not .Params.disableRecent -}}
         {{- $recentPosts := first $recentCount (sort .Site.RegularPages "Lastmod" "desc") }}
 		<h2>{{- .Site.Params.recentTitle -}}</h2>
         <div class="posts-group">
