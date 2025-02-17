@@ -38,28 +38,50 @@
 		</div>
 		{{- end -}}
 		
-        {{- if .Site.Params.displayRecent -}}
+		<!-- Select most recent posts from current section and all subsections -->
+		{{- if .Site.Params.displayRecent -}}
+		{{- if not .Params.disableRecent -}}
+
 		{{- $recentCount := .Params.recentPostsCount | default .Site.Params.recentCount }}
-        {{- if not .Params.disableRecent -}}
-        {{- $recentPosts := first $recentCount (sort .Site.RegularPages "Lastmod" "desc") }}
+		{{- $currentSection := .CurrentSection }}
+		{{- $allRelevantPages := slice }}
+
+		<!-- Collect all posts from the current section and its nested subsections -->
+		{{- range $currentSection.Sections }}
+			{{- $allRelevantPages = $allRelevantPages | append .RegularPages }}
+			{{- range .Sections }}
+				{{- $allRelevantPages = $allRelevantPages | append .RegularPages }}
+			{{- end }}
+		{{- end }}
+
+		<!-- Also include pages directly under the current section -->
+		{{- $allRelevantPages = $allRelevantPages | append $currentSection.RegularPages }}
+
+		<!-- Sort by last modified date and limit to the most recent X posts -->
+		{{- $recentPosts := first $recentCount (sort $allRelevantPages ".Lastmod" "desc") }}
+
+		{{- if gt (len $recentPosts) 0 }}
 		<h2>{{- .Site.Params.recentTitle -}}</h2>
-        <div class="posts-group">
-            <ul class="posts-list">
-                {{- range $recentPosts }}
-                <li class="post-item">
-                    <a href="{{ .RelPermalink }}">
-                        <span class="post-title">{{ .Title }}</span>
-                        <span class="post-day">{{ .Lastmod.Format .Site.Params.dateformShort }}</span>
-                    </a>
-                    {{- if and .Params.description .Site.Params.descriptionInPosts -}}
-                    <span class="post-description">{{ .Params.description }}</span>
-                    {{- end }}
-                </li>
-                {{- end }}
-            </ul>
-        </div>
-        {{- end -}}
-        {{- end -}}
+		<div class="posts-group">
+			<ul class="posts-list">
+				{{- range $recentPosts }}
+				<li class="post-item">
+					<a href="{{ .RelPermalink }}">
+						<span class="post-title">{{ .Title }}</span>
+						<span class="post-day">{{ .Lastmod.Format "2006-01-02" }}</span>
+					</a>
+					{{- if and .Params.description .Site.Params.descriptionInPosts -}}
+					<span class="post-description">{{ .Params.description }}</span>
+					{{- end }}
+				</li>
+				{{- end }}
+			</ul>
+		</div>
+		{{- end }}
+
+		{{- end }}
+		{{- end }}
+
 
 		{{- range .Data.Pages.GroupByLastmod "2006" }}
 		{{ $pages := len (.Pages) }}
