@@ -37,7 +37,31 @@
 			</ul>
 		</div>
 		{{- end -}}
-		{{- range .Data.Pages.GroupByDate "2006" }}
+		
+        {{- if .Site.Params.displayRecent -}}
+		{{- $recentCount := .Params.recentPostsCount | default .Site.Params.recentCount }}
+        {{- if not .Site.Params.disableRecent -}}
+        {{- $recentPosts := first $recentCount (sort .Site.RegularPages "Lastmod" "desc") }}
+		<h2>{{- .Site.Params.recentTitle -}}</h2>
+        <div class="posts-group">
+            <ul class="posts-list">
+                {{- range $recentPosts }}
+                <li class="post-item">
+                    <a href="{{ .RelPermalink }}">
+                        <span class="post-title">{{ .Title }}</span>
+                        <span class="post-day">{{ .Lastmod.Format .Site.Params.dateformShort }}</span>
+                    </a>
+                    {{- if and .Params.description .Site.Params.descriptionInPosts -}}
+                    <span class="post-description">{{ .Params.description }}</span>
+                    {{- end }}
+                </li>
+                {{- end }}
+            </ul>
+        </div>
+        {{- end -}}
+        {{- end -}}
+
+		{{- range .Data.Pages.GroupByLastmod "2006" }}
 		{{ $pages := len (.Pages) }}
 		{{ $pages_pin := len ( where .Pages ".Params.pin" "eq" true) }}
 		{{- if gt $pages $pages_pin -}}
@@ -48,7 +72,7 @@
 				<li class="post-item">
 					<a href="{{.Permalink}}">
 						<span class="post-title">{{.Title}}</span>
-						<span class="post-day">{{ .Date.Format .Site.Params.dateformShort }}</span>
+						<span class="post-day">{{ .Lastmod.Format .Site.Params.dateformShort }}</span>
 					</a>
 					{{- if and .Page.Params.description .Site.Params.descriptionInPosts -}}
 					<span class="post-description">{{ .Page.Params.description }}</span>
