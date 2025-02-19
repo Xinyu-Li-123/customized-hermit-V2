@@ -1,3 +1,23 @@
+This is a fork of [Hermit-v2](https://github.com/1bl4z3r/hermit-V2) with the following customized changes, besides changes to colors
+
+- Group by `lastmod` instead of `date`
+
+    We group posts by their last modified date, instead of their creation date. The last mod date is by default the git's last commit date of the file.
+
+- Display recent posts
+
+    In `hugo.toml`, set `displayRecent` to true. If `disableRecent` is not set to true in the page's front matter (defined in the `_index.md` file of the page's folder), a section of recent post will be displayed. The section's title and number of recent post are defined by `recentTitle` and `recentCount` respectively in `hugo.toml`.
+
+    Below is an example that defines a recent post section with title "Recent Posts" and 3 most recent posts.
+
+    ```toml
+    displayRecent = true
+    recentTitle = "Recent Posts"
+    recentCount = 3
+    ```
+
+Below is the README of the original hermit-v2 repo
+
 # Hermit-V2 _- The Minimal Hugo Theme_
 
 Hermit-V2 is a minimal and fast theme for Hugo, built for bloggers who want a simple and focused website. This is a maintained fork of [Hermit](https://github.com/Track3/hermit), which iterates over the original work to have production-ready experience with bug fixes and new features.
