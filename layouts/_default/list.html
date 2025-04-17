@@ -38,6 +38,7 @@
 		</div>
 		{{- end -}}
 		
+		<!-- FIXME: This only search the direct children leaf bundles. Need to recursively search for all posts -->
 		<!-- Select most recent posts from current section and all subsections -->
 		{{- if .Site.Params.displayRecent -}}
 		{{- if not .Params.disableRecent -}}
