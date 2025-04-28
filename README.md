@@ -2,6 +2,28 @@ This is a fork of [Hermit-v2](https://github.com/1bl4z3r/hermit-V2) with the fol
 
 - Group by `lastmod` instead of `date`
 
+- Display recent posts
+
+The original README of Hermit-v2 is kept at the end of this README.
+
+## TODO
+
+- [ ] Fix recent post bug. Currently it only fetches recent posts within 1 or 2 level of nested folders. It should be able to walk over all subfolders and fetch the most recent posts at compile time.
+
+- [ ] Allow certain index pages to be sorted by post name instead of date, for example, the reading note of a book where title is `Chapter <ID>. <CHAPTER_NAME>`.
+
+- [ ] Provide options to fold all code blocks in front matter
+
+    This is because some of the leetcode note contains long codes, making it hard to read.
+
+    Either there is a feature in hermit v2 that does this, or we will have to implement it ourselves.
+
+## New Features
+
+This is a list of features I implemented on top of Hermit-v2
+
+- Group by `lastmod` instead of `date`
+
     We group posts by their last modified date, instead of their creation date. The last mod date is by default the git's last commit date of the file.
 
 - Display recent posts
@@ -15,8 +37,6 @@ This is a fork of [Hermit-v2](https://github.com/1bl4z3r/hermit-V2) with the fol
     recentTitle = "Recent Posts"
     recentCount = 3
     ```
-
-Below is the README of the original hermit-v2 repo
 
 # Hermit-V2 _- The Minimal Hugo Theme_
 
