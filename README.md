@@ -1,4 +1,4 @@
-This is a fork of [Hermit-v2](https://github.com/1bl4z3r/hermit-V2) with the following customized changes, besides changes to colors
+This is a fork of [Hermit-v2](https://github.com/1bl4z3r/hermit-V2) with the following customized changes, besides changes to colors. Below are some examples, the full list of new features is introduced in the section below.
 
 - Group by `lastmod` instead of `date`
 
@@ -10,8 +10,6 @@ The original README of Hermit-v2 is kept at the end of this README.
 
 - [ ] Fix recent post bug. Currently it only fetches recent posts within 1 or 2 level of nested folders. It should be able to walk over all subfolders and fetch the most recent posts at compile time.
 
-- [ ] Allow certain index pages to be sorted by post name instead of date, for example, the reading note of a book where title is `Chapter <ID>. <CHAPTER_NAME>`.
-
 - [ ] Provide options to fold all code blocks in front matter
 
     This is because some of the leetcode note contains long codes, making it hard to read.
@@ -22,11 +20,15 @@ The original README of Hermit-v2 is kept at the end of this README.
 
 This is a list of features I implemented on top of Hermit-v2
 
+### Overview
+
+This is an overview of the added parameters. For details, refer to next two sections.
+
 - Group by `lastmod` instead of `date`
 
     We group posts by their last modified date, instead of their creation date. The last mod date is by default the git's last commit date of the file.
 
-- Display recent posts
+- Display recent posts with `displayRecent`, `recentCount`, and `recentTitle`
 
     In `hugo.toml`, set `displayRecent` to true. If `disableRecent` is not set to true in the page's front matter (defined in the `_index.md` file of the page's folder), a section of recent post will be displayed. The section's title and number of recent post are defined by `recentTitle` and `recentCount` respectively in `hugo.toml`.
 
@@ -37,6 +39,34 @@ This is a list of features I implemented on top of Hermit-v2
     recentTitle = "Recent Posts"
     recentCount = 3
     ```
+
+- Sort posts within each page by either title or last modified date
+
+### Common Parameters
+
+This is a list of parameters that appears in both site-wide setting (in `hugo.toml`) and post-specific setting (in post's front matter). If a parameter of the same name exists for both site-wide and post-specific context, the post-specific one always override the site-wide one. For example, if `.Params.displayRecent` is false in the `_index.md` of a specific page, but `.Site.Params.displayRecent` is true, the page of that specific post will not display recent post, but all others will display recent post. 
+
+- `displayRecent` (bool): Whether or not to display recent posts within current folder. Note that the range of post is restricted to all posts in the current folder and subfolders.
+
+- `recentCount` (int): Number of recent posts to display.
+
+- `recentTitle` (string): Title of the recent post section.
+
+- `sortPostBy` (string): In a page, sort posts by certain property.
+
+    Allowed value: 
+
+    - `date`: the default value. Sort posts descendingly by their last modified date, and group them by year.
+
+    - `title`: sort posts ascendingly by their title.
+
+### Site-wide Parameters
+
+This is a list of site-wise parameters you can set in `<PROJECT_ROOT>/hugo.toml`. They can be accessed in a template by `.Site.Params.XXX`. 
+
+### Post-specific Parameters
+
+This is a list of post-specific parameters you can set in the front matter of the post. They can be accessed by `.Params.XXX`.
 
 # Hermit-V2 _- The Minimal Hugo Theme_
 
