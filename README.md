@@ -1,10 +1,10 @@
-This is a fork of [Hermit-v2](https://github.com/1bl4z3r/hermit-V2) with the following customized changes, besides changes to colors. Below are some examples, the full list of new features is introduced in the section below.
+This is a fork of [Hermit-V2](https://github.com/1bl4z3r/hermit-V2) with the following customized changes, besides changes to colors. Below are some examples, the full list of new features is introduced in the section below.
 
 - Group by `lastmod` instead of `date`
 
 - Display recent posts
 
-The original README of Hermit-v2 is kept at the end of this README.
+The original README of Hermit-V2 is kept at the end of this README.
 
 ## TODO
 
@@ -16,13 +16,15 @@ The original README of Hermit-v2 is kept at the end of this README.
 
     Either there is a feature in hermit v2 that does this, or we will have to implement it ourselves.
 
-## New Features
+- [ ] Change the color scheme of code block to lighe mode as well.
+
+## Documentation of New Features and Parameters
 
 This is a list of features I implemented on top of Hermit-v2
 
 ### Overview
 
-This is an overview of the added parameters. For details, refer to next two sections.
+This is an overview of the added features. Some features are controlled by certina parameters, others are just baked in the theme. Later sections provide a detailed documentation on the added parameters.
 
 - Group by `lastmod` instead of `date`
 
@@ -44,7 +46,7 @@ This is an overview of the added parameters. For details, refer to next two sect
 
 ### Common Parameters
 
-This is a list of parameters that appears in both site-wide setting (in `hugo.toml`) and post-specific setting (in post's front matter). If a parameter of the same name exists for both site-wide and post-specific context, the post-specific one always override the site-wide one. For example, if `.Params.displayRecent` is false in the `_index.md` of a specific page, but `.Site.Params.displayRecent` is true, the page of that specific post will not display recent post, but all others will display recent post. 
+This is a list of parameters that appears in both site-wide setting (in `hugo.toml`) and post-specific setting (in post's front matter). If a parameter of the same name exists for both site-wide and post-specific context, the post-specific one always override the site-wide one. For example, if `.Params.displayRecent` is false in the `_index.md` of a specific page, but `.Site.Params.displayRecent` is true, the page of that specific post will not display recent post, but all others will display recent post.
 
 - `displayRecent` (bool): Whether or not to display recent posts within current folder. Note that the range of post is restricted to all posts in the current folder and subfolders.
 
@@ -54,26 +56,25 @@ This is a list of parameters that appears in both site-wide setting (in `hugo.to
 
 - `sortPostBy` (string): In a page, sort posts by certain property.
 
-    Allowed value: 
+    Allowed value:
 
-    - `date`: the default value. Sort posts descendingly by their last modified date, and group them by year.
+  - `date`: the default value. Sort posts descendingly by their last modified date, and group them by year.
 
-    - `title`: sort posts ascendingly by their title.
+  - `title`: sort posts ascendingly by their title.
 
 ### Site-wide Parameters
 
-This is a list of site-wise parameters you can set in `<PROJECT_ROOT>/hugo.toml`. They can be accessed in a template by `.Site.Params.XXX`. 
+This is a list of site-wise parameters you can set in `<PROJECT_ROOT>/hugo.toml`. They can be accessed in a template by `.Site.Params.XXX`.
 
 ### Post-specific Parameters
 
 This is a list of post-specific parameters you can set in the front matter of the post. They can be accessed by `.Params.XXX`.
 
-# Hermit-V2 _- The Minimal Hugo Theme_
+# Hermit-V2 _- The Minimal Hugo Theme_ (Original README of Hermit-V2)
 
 Hermit-V2 is a minimal and fast theme for Hugo, built for bloggers who want a simple and focused website. This is a maintained fork of [Hermit](https://github.com/Track3/hermit), which iterates over the original work to have production-ready experience with bug fixes and new features.
 
 ![](https://raw.githubusercontent.com/1bl4z3r/hermit-V2/main/images/screenshot.jpg)
-
 
 ## First Impression & Demo
 
@@ -109,6 +110,7 @@ git submodule add -b main https://github.com/1bl4z3r/hermit-V2 themes/hermit-v2
 ```
 
 To update submodule and to have the latest version of the theme with your project, run
+
 ```bash
 git submodule update --remote
 ```
@@ -117,13 +119,13 @@ git submodule update --remote
 
 ### Features Inherited from Original Theme
 
-* A single-column layout and carefully crafted typography offers a great reading experience.
-* Navigation and functions are placed in the bottom-bar which will hide when you scroll down.
-* Featured image is supported. It will be displayed as a dimmed background of the page.
-* Displays all of your posts on a single page, with one section per year, simple and compact.
-* Extremely lightweight and load fast. No third party framework, no unnecessary code.
-* All code fields feature syntax highlighting and a code-copy function
-* Responsive & Retina Ready. Scales gracefully from a big screen all the way down to the smallest mobile phone. Assets in vector format ensures that it looks sharp on high-resolution screens.
+- A single-column layout and carefully crafted typography offers a great reading experience.
+- Navigation and functions are placed in the bottom-bar which will hide when you scroll down.
+- Featured image is supported. It will be displayed as a dimmed background of the page.
+- Displays all of your posts on a single page, with one section per year, simple and compact.
+- Extremely lightweight and load fast. No third party framework, no unnecessary code.
+- All code fields feature syntax highlighting and a code-copy function
+- Responsive & Retina Ready. Scales gracefully from a big screen all the way down to the smallest mobile phone. Assets in vector format ensures that it looks sharp on high-resolution screens.
 
 ![](https://raw.githubusercontent.com/1bl4z3r/hermit-V2/staging/images/hermit.webp)
 
@@ -148,8 +150,8 @@ If, for some reason, you want to apply style for the whole theme, which should b
 
 This theme allows to be customized. To customize, copy the respective scss file from the theme to site's `assets/scss/` and edit them to your liking.
 
-* To customize theme, Scroll to Top button and Admonition colors, copy [__colors.scss_](https://github.com/1bl4z3r/hermit-V2/blob/staging/assets/scss/_colors.scss)
-* To customize theme fonts, copy [__fonts.scss_](https://github.com/1bl4z3r/hermit-V2/blob/staging/assets/scss/_fonts.scss)
+- To customize theme, Scroll to Top button and Admonition colors, copy [__colors.scss_](https://github.com/1bl4z3r/hermit-V2/blob/staging/assets/scss/_colors.scss)
+- To customize theme fonts, copy [__fonts.scss_](https://github.com/1bl4z3r/hermit-V2/blob/staging/assets/scss/_fonts.scss)
 
 ### Extend functionality
 
@@ -159,31 +161,31 @@ Layouts can live in either the project’s (root) or the themes’ layout folder
 
 Copy files as required to site's `layouts/partials/` and edit them to fit your needs.
 
-* To add or modify SVG images used in the theme, copy [_svg.html_](https://github.com/1bl4z3r/hermit-V2/blob/staging/layouts/partials/svg.html)
-* To add or modify comment system (default is Disqus), copy [_comments.html_](https://github.com/1bl4z3r/hermit-V2/blob/staging/layouts/partials/comments.html)
-* To add or modify custom analytics(default is Google Analytics), copy [_analytics.html_](https://github.com/1bl4z3r/hermit-V2/blob/staging/layouts/partials/analytics.html)
-* To inject HTML code to every page's document head or right above the closing body tag ( this makes it easy to add any HTML metadata, custom css/js, DNS-prefetch etc.), create a file at site's _extra-head.html_ or _extra-foot.html_
+- To add or modify SVG images used in the theme, copy [_svg.html_](https://github.com/1bl4z3r/hermit-V2/blob/staging/layouts/partials/svg.html)
+- To add or modify comment system (default is Disqus), copy [_comments.html_](https://github.com/1bl4z3r/hermit-V2/blob/staging/layouts/partials/comments.html)
+- To add or modify custom analytics(default is Google Analytics), copy [_analytics.html_](https://github.com/1bl4z3r/hermit-V2/blob/staging/layouts/partials/analytics.html)
+- To inject HTML code to every page's document head or right above the closing body tag ( this makes it easy to add any HTML metadata, custom css/js, DNS-prefetch etc.), create a file at site's _extra-head.html_ or _extra-foot.html_
 
 ### Favicon
 
 Use [RealFaviconGenerator](https://realfavicongenerator.net/) to generate these files, put them into your site's `static` folder:
 
-* android-chrome-192x192.png
-* android-chrome-512x512.png
-* apple-touch-icon.png
-* favicon-16x16.png
-* favicon-32x32.png
-* favicon.ico
-* mstile-150x150.png
-* safari-pinned-tab.svg
-* site.webmanifest
+- android-chrome-192x192.png
+- android-chrome-512x512.png
+- apple-touch-icon.png
+- favicon-16x16.png
+- favicon-32x32.png
+- favicon.ico
+- mstile-150x150.png
+- safari-pinned-tab.svg
+- site.webmanifest
 
 #### SVG Favicons
 
 If your favicon is in SVG format, there are two ways to implement the same in this theme.
 
-* If you are looking for a clean directory structure, place your favicon as `favicon.svg` in `static` directory. **In this mode, favicon will not be minified by Hugo**
-* If you want your generated site to be as light as possible, place your favicon as `favicon.svg` in `assets/images`. **In this mode, favicon will be minified by Hugo**
+- If you are looking for a clean directory structure, place your favicon as `favicon.svg` in `static` directory. **In this mode, favicon will not be minified by Hugo**
+- If you want your generated site to be as light as possible, place your favicon as `favicon.svg` in `assets/images`. **In this mode, favicon will be minified by Hugo**
 
 ### Social icons
 
@@ -199,13 +201,12 @@ The following icons are supported, please make sure the `name` field is exactly 
 | `etsy`            | `tiktok`     | `imgur`        | `bluesky`       | `xmpp`       |
 | `medium`          | `medium old` | `pixelfed`     | `ko-fi`         |              |
 
-
 If that's not enough, you can see [Extend functionality](#extend-functionality) section.
 
 ### Manage content
 
-* Keep your regular pages in the `content` folder. To create a new page, run `hugo new page-title.md`
-* Keep your blog posts in the `content/posts` folder. To create a new post, run `hugo new posts/post-title.md`
+- Keep your regular pages in the `content` folder. To create a new page, run `hugo new page-title.md`
+- Keep your blog posts in the `content/posts` folder. To create a new post, run `hugo new posts/post-title.md`
 
 ### Customize CSS
 
@@ -229,7 +230,7 @@ This theme is made specifically with translation in mind. Translations of few la
 
 ### Sites using hermit-V2
 
-__Sites using hermit-V2__ is a user contributed list of all the blogs/pages that is using hermit-V2 in some capacity. It could be any component of the theme from landing page or a partial to full fledged use of the theme. The objective of this section is to :
+**Sites using hermit-V2** is a user contributed list of all the blogs/pages that is using hermit-V2 in some capacity. It could be any component of the theme from landing page or a partial to full fledged use of the theme. The objective of this section is to :
 
 - Help new and aspiring bloggers/webmasters to get inspiration from
 - Create a sense of community
@@ -237,13 +238,14 @@ __Sites using hermit-V2__ is a user contributed list of all the blogs/pages that
 You can find currently listed sites from [Sites-using-hermit‐V2 (https://github.com/1bl4z3r/hermit-V2/wiki#sites-using-hermit-v2)](https://github.com/1bl4z3r/hermit-V2/wiki#sites-using-hermit-v2) and you can add your site by raising an [issue](https://github.com/1bl4z3r/hermit-V2/issues/new?assignees=1bl4z3r&labels=hermit-V2+sites&projects=&template=add-remove-sites-using-hermit-v2.md&title=Add+to+Sites+using+hermit-V2).
 
 ## Share your thoughts
+
 Share your thoughts on how to make this theme more suited for you. It could be a general feedback or something that couldn't be classified as an Issue. You can share it in Discussions : [https://github.com/1bl4z3r/hermit-V2/discussions](https://github.com/1bl4z3r/hermit-V2/discussions)
 
 ## Acknowledgments
 
-* [normalize.css](https://necolas.github.io/normalize.css/) - [MIT](https://github.com/necolas/normalize.css/blob/master/LICENSE.md)
-* [animate.css](https://daneden.github.io/animate.css/) - [MIT](https://github.com/daneden/animate.css/blob/master/LICENSE)
-* [feather](https://feathericons.com/) - [MIT](https://github.com/feathericons/feather/blob/master/LICENSE)
-* [code-copy.js](assets/js/code-copy.js) - [Tom Spencer](https://www.fiznool.com/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/)
-* [Everyone, who has raised an issue](https://github.com/1bl4z3r/hermit-V2/issues?q=)
-* [Everyone, who has submitted a PR](https://github.com/1bl4z3r/hermit-V2/pulls?q=)
+- [normalize.css](https://necolas.github.io/normalize.css/) - [MIT](https://github.com/necolas/normalize.css/blob/master/LICENSE.md)
+- [animate.css](https://daneden.github.io/animate.css/) - [MIT](https://github.com/daneden/animate.css/blob/master/LICENSE)
+- [feather](https://feathericons.com/) - [MIT](https://github.com/feathericons/feather/blob/master/LICENSE)
+- [code-copy.js](assets/js/code-copy.js) - [Tom Spencer](https://www.fiznool.com/blog/2018/09/14/adding-click-to-copy-buttons-to-a-hugo-powered-blog/)
+- [Everyone, who has raised an issue](https://github.com/1bl4z3r/hermit-V2/issues?q=)
+- [Everyone, who has submitted a PR](https://github.com/1bl4z3r/hermit-V2/pulls?q=)
