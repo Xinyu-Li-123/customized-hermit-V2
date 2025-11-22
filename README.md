@@ -18,6 +18,8 @@ The original README of Hermit-V2 is kept at the end of this README.
 
 - [ ] Change the color scheme of code block to lighe mode as well.
 
+- [ ] Add a "go back to parent directory" button for each post / folder
+
 ## Documentation of New Features and Parameters
 
 This is a list of features I implemented on top of Hermit-v2
