@@ -18,6 +18,7 @@
   align-items: center;
 }
 
+.home-btn,
 .parent-folder-btn {
   background: none;
   border: 1px solid var(--fg-color, #333);
@@ -42,6 +43,7 @@
   }
 }
 
+.home-icon,
 .parent-icon {
   display: block;
 }
@@ -92,11 +94,13 @@
     gap: 0.3rem;
   }
 
+  .home-btn,
   .parent-folder-btn,
   .view-toggle-btn {
     padding: 0.4rem;
   }
 
+  .home-icon,
   .parent-icon,
   .toggle-icon {
     width: 18px;
