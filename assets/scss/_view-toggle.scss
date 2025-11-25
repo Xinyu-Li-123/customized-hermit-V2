@@ -1,0 +1,58 @@
+// View Toggle Styles
+// Styles for the folder view ↔ list view toggle feature
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    margin: 0;
+  }
+}
+
+.view-toggle-btn {
+  background: none;
+  border: 1px solid var(--fg-color, #333);
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+
+  &:hover {
+    opacity: 1;
+    background: var(--midnightblue, rgba(0, 0, 0, 0.05));
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.toggle-icon {
+  display: block;
+}
+
+.view-container {
+  transition: opacity 0.2s ease;
+}
+
+@media (max-width: 768px) {
+  .list-header {
+    flex-direction: row;
+  }
+
+  .view-toggle-btn {
+    padding: 0.4rem;
+  }
+
+  .toggle-icon {
+    width: 18px;
+    height: 18px;
+  }
+}

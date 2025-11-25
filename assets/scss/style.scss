@@ -6,6 +6,7 @@
 {{ end }}
 @import "scrolltotop.scss";
 @import "socialshare.scss";
+@import "view-toggle.scss";
 {{ if (fileExists "assets/scss/userstyles.scss") }}
 @import "userstyles.scss";
 {{ end }}
