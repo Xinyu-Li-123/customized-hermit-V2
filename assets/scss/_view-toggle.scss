@@ -12,6 +12,40 @@
   }
 }
 
+.header-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.parent-folder-btn {
+  background: none;
+  border: 1px solid var(--fg-color, #333);
+  border-radius: 4px;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  opacity: 0.7;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    opacity: 1;
+    background: var(--midnightblue, rgba(0, 0, 0, 0.05));
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.parent-icon {
+  display: block;
+}
+
 .view-toggle-btn {
   background: none;
   border: 1px solid var(--fg-color, #333);
@@ -54,10 +88,16 @@
     flex-direction: row;
   }
 
+  .header-buttons {
+    gap: 0.3rem;
+  }
+
+  .parent-folder-btn,
   .view-toggle-btn {
     padding: 0.4rem;
   }
 
+  .parent-icon,
   .toggle-icon {
     width: 18px;
     height: 18px;

@@ -35,6 +35,8 @@
 			{{- end }}
 		{{- end }}
 
+    {{- $folders = $folders | append "./" }}
+
 		{{- if gt (len $folders) 0 }}
 			{{- $folders = collections.Reverse $folders }}
 			{{- $folderPath = delimit $folders "" }}
