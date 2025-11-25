@@ -1,0 +1,119 @@
+<!-- Folder View (Hierarchical) -->
+<div id="folder-view" class="view-container">
+{{- if and (ge (len (where .Site.Pages ".Params.pin" true)) 1) (.Site.Params.pinned) (not (in .Page.RelPermalink (or "tags" "categories"))) -}}
+<h2>{{- .Site.Params.pinned -}}</h2>
+{{$pin_name := .Site.Params.pinnedSVGname | default "pin" }}
+<div class="pinned-posts-group">
+	<ul class="pinned-posts-list">
+		{{- range where .Site.Pages ".Params.pin" true }}
+		<li class="pinned-post-item">
+			{{- partial "svg.html" (dict "context" . "name" $pin_name) }}
+			<a href="{{.Permalink}}"><span class="post-title">{{.Title}}</span></a>
+		</li>
+		{{- end }}
+	</ul>
+</div>
+{{- end -}}
+
+<!-- FIXME: This only search the direct children leaf bundles. Need to recursively search for all posts -->
+<!-- Select most recent posts from current section and all subsections -->
+
+<!-- `default arg1 arg2` returns `arg2` if it's set, o/w returns `arg1 -->
+ <!-- Thus the precedence is .Params.displayRecent > .Site.Params.displayRecent > false -->
+{{ $displayRecent := default false (default .Site.Params.displayRecent .Params.displayRecent) }}
+
+{{- if $displayRecent -}}
+
+{{ $recentCount := default 3 (default .Site.Params.recentCount .Params.recentCount) }}
+{{ $recentTitle := default "Recent Posts" (default .Site.Params.recentTitle .Params.recentTitle) }}
+
+{{- $currentSection := .CurrentSection }}
+{{- $allRelevantPages := slice }}
+
+<!-- Collect all posts from the current section and its nested subsections -->
+{{- range $currentSection.Sections }}
+	{{- $allRelevantPages = $allRelevantPages | append .RegularPages }}
+	{{- range .Sections }}
+		{{- $allRelevantPages = $allRelevantPages | append .RegularPages }}
+	{{- end }}
+{{- end }}
+
+<!-- Also include pages directly under the current section -->
+{{- $allRelevantPages = $allRelevantPages | append $currentSection.RegularPages }}
+
+<!-- Sort by last modified date and limit to the most recent X posts -->
+{{- $recentPosts := first $recentCount (sort $allRelevantPages ".Lastmod" "desc") }}
+
+{{- if gt (len $recentPosts) 0 }}
+<h2>{{- $recentTitle -}}</h2>
+<div class="posts-group">
+	<ul class="posts-list">
+		{{- range $recentPosts }}
+		<li class="post-item">
+			<a href="{{ .RelPermalink }}">
+				<span class="post-title">{{ .Title }}</span>
+				<span class="post-day">{{ .Lastmod.Format "2006-01-02" }}</span>
+			</a>
+			{{- if and .Params.description .Site.Params.descriptionInPosts -}}
+			<span class="post-description">{{ .Params.description }}</span>
+			{{- end }}
+		</li>
+		{{- end }}
+	</ul>
+</div>
+{{- end }}
+
+{{- end }}
+
+
+ <!-- TODO: Provide option to Sort by lastmod, or by title -->
+{{ $sortPostBy := default "date" (default .Site.Params.sortPostBy .Params.sortPostBy) }}
+
+{{- if eq $sortPostBy "title" -}}
+
+	{{- $sortedPages := sort .Data.Pages ".Title" "asc" }}
+	<div class="posts-group">
+		<ul class="posts-list">
+			{{- range where $sortedPages ".Params.pin" "ne" true }}
+			<li class="post-item">
+				<a href="{{ .Permalink }}">
+					<span class="post-title">{{ .Title }}</span>
+					<span class="post-day">{{ .Lastmod.Format .Site.Params.dateformShort }}</span>
+				</a>
+				{{- if and .Page.Params.description .Site.Params.descriptionInPosts -}}
+					<span class="post-description">{{ .Page.Params.description }}</span>
+				{{- end }}
+			</li>
+		{{- end }}
+		</ul>
+	</div>
+
+
+{{- else if eq $sortPostBy "date" -}}
+
+	{{- range .Data.Pages.GroupByLastmod "2006" }}
+	{{ $pages := len (.Pages) }}
+	{{ $pages_pin := len ( where .Pages ".Params.pin" "eq" true) }}
+	{{- if gt $pages $pages_pin -}}
+	<div class="posts-group">
+		<div class="post-year" id="{{ .Key }}">{{ .Key }}</div>
+		<ul class="posts-list">
+			{{- range where .Pages ".Params.pin" "ne" true }}
+			<li class="post-item">
+				<a href="{{.Permalink}}">
+					<span class="post-title">{{.Title}}</span>
+					<span class="post-day">{{ .Lastmod.Format .Site.Params.dateformShort }}</span>
+				</a>
+				{{- if and .Page.Params.description .Site.Params.descriptionInPosts -}}
+				<span class="post-description">{{ .Page.Params.description }}</span>
+				{{- end -}}
+			</li>
+			{{- end }}
+		</ul>
+	</div>
+	{{- end -}}
+	{{- end }}
+
+{{- end -}}
+</div>
+<!-- End Folder View -->

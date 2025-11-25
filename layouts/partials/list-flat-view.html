@@ -1,0 +1,64 @@
+<!-- List View (Flat) -->
+<div id="list-view" class="view-container" style="display:none;">
+{{- $currentSection := .CurrentSection }}
+{{- $currentPath := $currentSection.RelPermalink }}
+{{- $allPosts := slice }}
+
+<!-- Collect all regular pages that are descendants of current section -->
+{{- range .Site.RegularPages }}
+	{{- if hasPrefix .RelPermalink $currentPath }}
+		{{- $allPosts = $allPosts | append . }}
+	{{- end }}
+{{- end }}
+
+{{- $allPosts = sort $allPosts ".Lastmod" "desc" }}
+
+{{- if gt (len $allPosts) 0 }}
+<h2>All Posts ({{ len $allPosts }})</h2>
+<div class="posts-group">
+	<ul class="posts-list">
+		{{- range $allPosts }}
+		{{- $folderPath := "" }}
+		{{- $postSection := .CurrentSection }}
+		{{- $folders := slice }}
+
+		{{- /* Build folder path by walking up from post section to current viewing section */ -}}
+		{{- $tempSection := $postSection }}
+		{{- range $i := seq 10 }}
+			{{- if $tempSection }}
+				{{- if ne $tempSection.RelPermalink $currentPath }}
+					{{- $folders = $folders | append $tempSection.Title }}
+					{{- $tempSection = $tempSection.Parent }}
+				{{- else }}
+					{{- break }}
+				{{- end }}
+			{{- end }}
+		{{- end }}
+
+		{{- if gt (len $folders) 0 }}
+			{{- $folders = collections.Reverse $folders }}
+			{{- $folderPath = delimit $folders "" }}
+			{{- $folderPath = printf "%s" $folderPath }}
+		{{- end }}
+
+		<li class="post-item">
+			<a href="{{ .RelPermalink }}">
+				<span class="post-title">
+					{{- if $folderPath -}}
+					<span class="post-folder-path">{{ $folderPath }}</span>
+            <br/>
+					{{- end -}}
+					{{ .Title }}
+				</span>
+				<span class="post-day">{{ .Lastmod.Format "2006-01-02" }}</span>
+			</a>
+			{{- if and .Params.description $.Site.Params.descriptionInPosts -}}
+			<span class="post-description">{{ .Params.description }}</span>
+			{{- end }}
+		</li>
+		{{- end }}
+	</ul>
+</div>
+{{- end }}
+</div>
+<!-- End List View -->

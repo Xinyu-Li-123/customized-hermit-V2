@@ -1,0 +1,50 @@
+<!-- Toggle View JavaScript -->
+<script>
+(function() {
+	const toggleBtn = document.getElementById('view-toggle');
+	const folderView = document.getElementById('folder-view');
+	const listView = document.getElementById('list-view');
+	const folderIcon = document.querySelector('.folder-icon');
+	const listIcon = document.querySelector('.list-icon');
+
+	// Use current section path as storage key
+	const storageKey = 'view-mode-{{ .CurrentSection.RelPermalink }}';
+
+	// Get saved preference or default to folder view
+	let currentView = localStorage.getItem(storageKey) || 'folder';
+
+	function showFolderView() {
+		folderView.style.display = 'block';
+		listView.style.display = 'none';
+		folderIcon.style.display = 'block';
+		listIcon.style.display = 'none';
+		currentView = 'folder';
+		localStorage.setItem(storageKey, 'folder');
+	}
+
+	function showListView() {
+		folderView.style.display = 'none';
+		listView.style.display = 'block';
+		folderIcon.style.display = 'none';
+		listIcon.style.display = 'block';
+		currentView = 'list';
+		localStorage.setItem(storageKey, 'list');
+	}
+
+	// Apply saved preference on load
+	if (currentView === 'list') {
+		showListView();
+	} else {
+		showFolderView();
+	}
+
+	// Toggle on button click
+	toggleBtn.addEventListener('click', function() {
+		if (currentView === 'folder') {
+			showListView();
+		} else {
+			showFolderView();
+		}
+	});
+})();
+</script>
