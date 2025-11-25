@@ -7,8 +7,8 @@
 	const folderIcon = document.querySelector('.folder-icon');
 	const listIcon = document.querySelector('.list-icon');
 
-	// Use current section path as storage key
-	const storageKey = 'view-mode-{{ .CurrentSection.RelPermalink }}';
+	// Use global storage key for shared preference across all folders
+	const storageKey = 'view-mode-global';
 
 	// Get saved preference or default to folder view
 	let currentView = localStorage.getItem(storageKey) || 'folder';
