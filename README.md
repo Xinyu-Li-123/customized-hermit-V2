@@ -20,6 +20,10 @@ The original README of Hermit-V2 is kept at the end of this README.
 
 - [ ] Add a "go back to parent directory" button for each post / folder
 
+## Set up
+
+- Install [pagefind](https://pagefind.app/docs/) to support search feature
+
 ## Documentation of New Features and Parameters
 
 This is a list of features I implemented on top of Hermit-v2
