@@ -1,5 +1,5 @@
 <!-- Folder View (Hierarchical) -->
-<div id="folder-view" class="view-container">
+<div id="folder-view" class="view-container" data-pagefind-ignore>
 {{- if and (ge (len (where .Site.Pages ".Params.pin" true)) 1) (.Site.Params.pinned) (not (in .Page.RelPermalink (or "tags" "categories"))) -}}
 <h2>{{- .Site.Params.pinned -}}</h2>
 {{$pin_name := .Site.Params.pinnedSVGname | default "pin" }}
